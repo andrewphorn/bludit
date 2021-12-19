@@ -701,6 +701,8 @@ class Pages extends dbJSON {
 				if($fields['date']<=$currentDate) {
 					$this->db[$pageKey]['type'] = 'published';
 					$saveDatabase = true;
+					// Execute plugins with the hook afterPageCreate
+					Theme::plugins('afterPageCreate', [$pageKey]);
 				}
 			}
 			elseif( ($fields['type']=='published') && (ORDER_BY=='date') ) {
